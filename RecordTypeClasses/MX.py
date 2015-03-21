@@ -15,5 +15,5 @@ class MX(Base.Base):
         return curr + rdlen
         
     def __str__(self):
-        return 'Host: %s Preference: %d\n' % (self.exchange,self.preference)
+        return 'Host: %s Preference: %d' % (self.exchange,self.preference)
     
