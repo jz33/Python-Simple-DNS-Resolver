@@ -43,6 +43,10 @@ class Resolver:
         self.data = data
         self.tcpmsg = struct.pack("!H", len(self.data)) + self.data
 
+    def UpdateData(self,data):
+        self.data = data
+        self.tcpmsg = struct.pack("!H", len(self.data)) + self.data
+        
     def Connect(self, nameserver = None):
         if nameserver is None:
             nameserver = GetNameServers()[0]
