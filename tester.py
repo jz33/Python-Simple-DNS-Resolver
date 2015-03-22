@@ -15,15 +15,18 @@ def execute(resolver,question,rr):
     print
         
 def main():
-    #question = 'google.com'
     question = 'wikipedia.org'
-    
+    #question = 'google.com'
+
     resolver = DNSResolver.Resolver()
     resolver.Connect()
     try:
+    
         execute(resolver,question,'A')
         execute(resolver,question,'MX')
         execute(resolver,question,'NS')
+        execute(resolver,question,'AAAA')
+        
     finally:
         resolver.Disconnect()
         
