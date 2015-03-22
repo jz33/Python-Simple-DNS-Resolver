@@ -11,6 +11,8 @@ Available DNS resouce record types:
 
 'MX'
 
+'AAAA'
+
 Usage:
 
     python tester.py
