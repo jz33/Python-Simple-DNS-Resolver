@@ -55,15 +55,15 @@ def Question(ques,rr):
     """
     lock = threading.Lock()
     lock.acquire()
-    ret = ques
+    ret = ''
     try:
         # QNAME
-        pos = ret.find('www')
-        if pos != -1:
-            ret[pos+1] = chr(8)
-        ret = ret.replace('.',chr(3),1)
-        
-        # NULL
+        domains = ques.split('.')
+        if len(domains) < 2:
+            raise IndexError
+        for d in domains:
+            ret += chr(len(d))
+            ret += d   
         ret += chr(0)
         
         # QTYPE
@@ -115,7 +115,7 @@ def Answer(msg):
         rrTypeName = DNSRecordTypes.toStr(rdtype)
         mod = DNSClassLoader.LoadClass(rrTypeName)
         answerClass = getattr(mod, rrTypeName)()
-        curr = answerClass.Decode(msg,curr,rdlen)
+        curr = answerClass.Decode(msg,curr,rdlen)        
         print answerClass
         
     # AUTHORITY
