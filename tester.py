@@ -2,17 +2,12 @@ import DNSMessage
 import DNSResolver
 import struct
 
-ACK = chr(6)
-
-def composeData(question, rr):
-    data = DNSMessage.Header() + ACK + DNSMessage.Question(question,rr) 
+def execute(resolver,question,rr):
+    data = DNSMessage.Header() + DNSMessage.Question(question,rr)
+    
     for w in data: print ord(w),
     print
-    return data    
-
-
-def execute(resolver,question,type):
-    data = composeData(question,type)
+    
     resolver.UpdateData(data)
     resolver.Send()
     chunk = resolver.Receive()
@@ -20,13 +15,15 @@ def execute(resolver,question,type):
     print
         
 def main():
-    question = 'google.com'
+    #question = 'google.com'
+    question = 'wikipedia.org'
     
     resolver = DNSResolver.Resolver()
     resolver.Connect()
     try:
         execute(resolver,question,'A')
         execute(resolver,question,'MX')
+        execute(resolver,question,'NS')
     finally:
         resolver.Disconnect()
         
