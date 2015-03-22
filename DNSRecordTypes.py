@@ -10,17 +10,20 @@ SOA = 6
 WKS = 11
 PTR = 12
 MX = 15
+AAAA = 28
 A6 = 38
 ANY = 255
 
 DictStrToInt = {
     'NONE' : NONE,
     'A' : A,
+    'NS' : NS,
     'CNAME' : CNAME,
     'SOA' : SOA,
     'WKS' : WKS,
     'PTR' : PTR,
     'MX' : MX,
+    'AAAA' : AAAA,
     'A6' : A6,
     'ANY' : ANY,
     }
@@ -28,11 +31,13 @@ DictStrToInt = {
 DictIntToStr = {
     NONE : 'NONE',
     A : 'A',
+    NS : 'NS',
     CNAME : 'CNAME',
     SOA : 'SOA',
     WKS : 'WKS',
     PTR : 'PTR',
     MX : 'MX',
+    AAAA : 'AAAA',
     A6 : 'A6',
     ANY : 'ANY',
     }
