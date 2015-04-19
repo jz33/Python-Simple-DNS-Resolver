@@ -1,5 +1,4 @@
 import Base
-import struct
 
 class NS(Base.Base):
 
