@@ -3,7 +3,7 @@ A Python socket-based DNS resolver that can send and decode DNS message on commo
 
 Ongoing project, currently works on Linux, IPv4, TCP
 
-Available DNS resouce record types:
+Current available DNS resouce record types:
 
 'A'
 
@@ -13,7 +13,9 @@ Available DNS resouce record types:
 
 'AAAA'
 
-Usage:
+'SOA'
+
+For tests:
 
     python tester.py
     
