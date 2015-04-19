@@ -2,6 +2,7 @@
 DNS resouce record types base class
 Author: junzhengrice@gmail.com
 '''
+import os
 
 UNDEFINED = 'UNCOMPUTED VALUE'
 
