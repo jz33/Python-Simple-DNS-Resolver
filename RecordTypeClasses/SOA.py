@@ -7,12 +7,16 @@ class SOA(Base.Base):
         self.admin = Base.UNDEFINED
  
     def Decode(self, msg, curr, rdlen):
-        (self.primary,used) = Base.ReadName(msg,curr)
-        curr += used
-        (self.admin,used) = Base.ReadName(msg,curr)
-        curr += used
+        print "curr: ", curr, "rdlen: ", rdlen
+        used = [0,0]
+        (self.primary,used[0]) = Base.ReadName(msg,curr)
+        (self.admin,used[1]) = Base.ReadName(msg,curr+used[0])
         
-        left = struct.unpack('!IIIII',msg[curr:curr+20])
+        t = used[0] + used[1]
+        if rdlen - t != 20:
+            raise IndexError
+        
+        left = struct.unpack('!IIIII',msg[curr+t:])
         self.serial = left[0]
         self.refresh = left[1]
         self.retry = left[2]
