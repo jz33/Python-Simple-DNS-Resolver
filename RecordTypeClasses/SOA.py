@@ -7,7 +7,6 @@ class SOA(Base.Base):
         self.admin = Base.UNDEFINED
  
     def Decode(self, msg, curr, rdlen):
-        print "curr: ", curr, "rdlen: ", rdlen
         used = [0,0]
         (self.primary,used[0]) = Base.ReadName(msg,curr)
         (self.admin,used[1]) = Base.ReadName(msg,curr+used[0])
