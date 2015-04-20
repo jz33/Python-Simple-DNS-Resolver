@@ -1,6 +1,5 @@
 import DNSMessage
 import DNSResolver
-import struct
 
 DEBUG = False
 
@@ -19,16 +18,17 @@ def execute(resolver,question,rr):
         
 def main():
     question = 'wikipedia.org'
-    #question = 'google.com'
-
+    question = 'google.com'
+    
     resolver = DNSResolver.Resolver()
     resolver.Connect()
     try:
         execute(resolver,question,'A')
-        execute(resolver,question,'MX')
         execute(resolver,question,'NS')
-        execute(resolver,question,'AAAA')
+        execute(resolver,question,'MX')
         execute(resolver,question,'SOA')
+        execute(resolver,question,'TXT')
+        execute(resolver,question,'AAAA')
         
     finally:
         resolver.Disconnect()
