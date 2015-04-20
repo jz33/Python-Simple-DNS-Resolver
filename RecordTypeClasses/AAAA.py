@@ -1,5 +1,4 @@
 import Base
-import struct
 
 class AAAA(Base.Base):
     def __init__(self):
