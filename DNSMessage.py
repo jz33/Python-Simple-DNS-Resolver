@@ -88,37 +88,42 @@ def Answer(msg):
     http://www.zytrax.com/books/dns/ch15/#answer
     Return DNS answer
     '''
-    if len(msg) < 12:
-        raise IndexError
+    lock = threading.Lock()
+    lock.acquire()
+    try:
+        if len(msg) < 12:
+            raise IndexError
   
-    counts = [0 for i in xrange(0,4)]
-    (id, flags, counts[0], counts[1], counts[2], counts[3]) =\
-         struct.unpack('!HHHHHH', msg[:12])
+        counts = [0 for i in xrange(0,4)]
+        (id, flags, counts[0], counts[1], counts[2], counts[3]) =\
+             struct.unpack('!HHHHHH', msg[:12])
 
-    curr = 12
+        curr = 12
     
-    # QUESTION
-    for i in xrange(counts[0]):
-        (text, used) = ReadName(msg, curr)
-        curr += used
-        (rdtype, rdclass) = struct.unpack('!HH', msg[curr : curr+4])
-        curr = curr + 4
-        #print i, 'QUESTION: ', text, used, rdtype, rdclass
+        # QUESTION
+        for i in xrange(counts[0]):
+            (text, used) = ReadName(msg, curr)
+            curr += used
+            (rdtype, rdclass) = struct.unpack('!HH', msg[curr : curr+4])
+            curr = curr + 4
+            #print i, 'QUESTION: ', text, used, rdtype, rdclass
     
-    # ANSWER
-    for i in xrange(counts[1]):
-        (text, used) = ReadName(msg, curr)
-        curr += used
-        (rdtype, rdclass, ttl, rdlen) = struct.unpack('!HHIH',msg[curr:curr+10])
-        curr = curr + 10
+        # ANSWER
+        for i in xrange(counts[1]):
+            (text, used) = ReadName(msg, curr)
+            curr += used
+            (rdtype, rdclass, ttl, rdlen) = struct.unpack('!HHIH',msg[curr:curr+10])
+            curr = curr + 10
  
-        rrTypeName = DNSRecordTypes.toStr(rdtype)
-        mod = DNSClassLoader.LoadClass(rrTypeName)
-        answerClass = getattr(mod, rrTypeName)()
-        curr = answerClass.Decode(msg,curr,rdlen)        
-        print answerClass
+            rrTypeName = DNSRecordTypes.toStr(rdtype)
+            mod = DNSClassLoader.LoadClass(rrTypeName)
+            answerClass = getattr(mod, rrTypeName)()
+            curr = answerClass.Decode(msg,curr,rdlen)        
+            print answerClass
         
-    # AUTHORITY
+        # AUTHORITY
     
-    # ADDITIONAL
+        # ADDITIONAL
+    finally:
+        lock.release()
     
