@@ -10,6 +10,7 @@ SOA = 6
 WKS = 11
 PTR = 12
 MX = 15
+TXT = 16
 AAAA = 28
 A6 = 38
 ANY = 255
@@ -23,6 +24,7 @@ DictStrToInt = {
     'WKS' : WKS,
     'PTR' : PTR,
     'MX' : MX,
+    'TXT' : TXT,
     'AAAA' : AAAA,
     'A6' : A6,
     'ANY' : ANY,
@@ -37,6 +39,7 @@ DictIntToStr = {
     WKS : 'WKS',
     PTR : 'PTR',
     MX : 'MX',
+    TXT : 'TXT',
     AAAA : 'AAAA',
     A6 : 'A6',
     ANY : 'ANY',
